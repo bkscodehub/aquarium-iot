@@ -1,0 +1,50 @@
+name: Build Aquarium IoT Firmware
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repo and submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive  # Important to get shared lib too
+
+      - name: 🔧 Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install platformio
+
+      - name: 🔐 Setup environment variables
+        env:
+          WIFI_SSID: ${{ secrets.WIFI_SSID }}
+          WIFI_PASS: ${{ secrets.WIFI_PASS }}
+          MQTT_BROKER: ${{ secrets.MQTT_BROKER }}
+          MQTT_USER: ${{ secrets.MQTT_USER }}
+          MQTT_PASS: ${{ secrets.MQTT_PASS }}
+          MQTT_PORT: ${{ secrets.MQTT_PORT }}
+        run: |
+          echo "WIFI_SSID=${WIFI_SSID}" >> .env
+          echo "WIFI_PASS=${WIFI_PASS}" >> .env
+          echo "MQTT_BROKER=${MQTT_BROKER}" >> .env
+          echo "MQTT_USER=${MQTT_USER}" >> .env
+          echo "MQTT_PASS=${MQTT_PASS}" >> .env
+          echo "MQTT_PORT=${MQTT_PORT}" >> .env
+
+      - name: 🛠️ Make build.sh executable
+        run: chmod +x build.sh
+        
+      - name: 🚀 Run build script
+        run: ./build.sh
+
+      - name: 📦 Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aquarium-lighting-firmware
+          path: artifacts/firmware.bin
+

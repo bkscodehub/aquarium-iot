@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: prod
 
     steps:
       - name: 📥 Checkout repo and submodules
@@ -20,7 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install platformio
 
-      - name: 🔐 Setup environment variables
+      - name: 🔐 Setup environment header file
         env:
           WIFI_SSID: ${{ secrets.WIFI_SSID }}
           WIFI_PASS: ${{ secrets.WIFI_PASS }}
@@ -29,12 +30,14 @@ jobs:
           MQTT_PASS: ${{ secrets.MQTT_PASS }}
           MQTT_PORT: ${{ secrets.MQTT_PORT }}
         run: |
-          echo "WIFI_SSID=${WIFI_SSID}" >> .env
-          echo "WIFI_PASS=${WIFI_PASS}" >> .env
-          echo "MQTT_BROKER=${MQTT_BROKER}" >> .env
-          echo "MQTT_USER=${MQTT_USER}" >> .env
-          echo "MQTT_PASS=${MQTT_PASS}" >> .env
-          echo "MQTT_PORT=${MQTT_PORT}" >> .env
+          mkdir -p firmware/include
+          echo "#pragma once" > firmware/include/env.h
+          echo "#define WIFI_SSID \"${WIFI_SSID}\"" >> firmware/include/env.h
+          echo "#define WIFI_PASS \"${WIFI_PASS}\"" >> firmware/include/env.h
+          echo "#define MQTT_BROKER \"${MQTT_BROKER}\"" >> firmware/include/env.h
+          echo "#define MQTT_USER \"${MQTT_USER}\"" >> firmware/include/env.h
+          echo "#define MQTT_PASS \"${MQTT_PASS}\"" >> firmware/include/env.h
+          echo "#define MQTT_PORT ${MQTT_PORT}" >> firmware/include/env.h
 
       - name: 🛠️ Make build.sh executable
         run: chmod +x build.sh

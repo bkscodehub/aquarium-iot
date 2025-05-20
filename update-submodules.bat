@@ -31,7 +31,7 @@ git add subprojects\aquarium-iot-shared-lib
 
 echo.
 echo === Committing submodule updates ===
-git commit -m "Update submodules: aquarium-lighting-controller & aquarium-iot-shared-lib to latest main"
+git commit -m "Update submodules: to latest main $(Get-Date -Format 'yyyy-MM-dd-HH:mm:ss')"
 
 echo.
 echo === Pushing to remote ===

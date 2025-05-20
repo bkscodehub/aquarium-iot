@@ -1,0 +1,6 @@
+[submodule "subprojects/aquarium-lighting-controller"]
+	path = subprojects/aquarium-lighting-controller
+	url = https://github.com/bkscodehub/aquarium-lighting-controller
+[submodule "subprojects/aquarium-iot-shared-lib"]
+	path = subprojects/aquarium-iot-shared-lib
+	url = https://github.com/bkscodehub/aquarium-iot-shared-lib

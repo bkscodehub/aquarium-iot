@@ -27,7 +27,9 @@ pio run -v
 
 # Copy the final binary to a known location for GitHub Actions to pick up
 if [ -f .pio/build/esp12f/firmware.bin ]; then
+  echo ">>> listing dir contents - .pio/build/esp12f/"
   ls -l .pio/build/esp12f/
+  mkdir -p artifacts
   cp .pio/build/esp12f/firmware.bin artifacts/
   echo "✅ firmware.bin copied successfully."
 else

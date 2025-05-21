@@ -35,8 +35,5 @@ else
   echo "❌ firmware.bin not found!"
   exit 1
 fi
-echo "📂 Contents of artifacts:"
-pwd
-ls -l artifacts
 
 echo "✅ Build and copy completed."

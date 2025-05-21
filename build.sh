@@ -26,8 +26,17 @@ echo "⚙️ Building with PlatformIO..."
 pio run -v
 
 # Copy the final binary to a known location for GitHub Actions to pick up
-echo "📦 Copying build artifacts..."
-mkdir -p artifacts
-cp .pio/build/esp12f/firmware.bin artifacts/
+if [ -f .pio/build/esp12f/firmware.bin ]; then
+  ls -l .pio/build/esp12f/
+  cp .pio/build/esp12f/firmware.bin artifacts/
+  echo "✅ firmware.bin copied successfully."
+else
+  echo "❌ firmware.bin not found!"
+  exit 1
+fi
+
+# echo "📦 Copying build artifacts..."
+# mkdir -p artifacts
+# cp .pio/build/esp12f/firmware.bin artifacts/
 
 echo "✅ Build and copy completed."

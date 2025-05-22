@@ -44,6 +44,7 @@ if [ -f .pio/build/esp12f/firmware.bin ]; then
   ls -l .pio/build/esp12f/
   mkdir -p ../../artifacts
   cp .pio/build/esp12f/firmware.bin ../../artifacts/
+  cp firmware/include/env.h ../../artifacts/
   echo "✅ firmware.bin copied successfully."
 else
   echo "❌ firmware.bin not found!"

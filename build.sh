@@ -33,6 +33,8 @@ echo "#define MQTT_USERNAME \"${MQTT_USERNAME}\"" >> firmware/include/env.h
 echo "#define MQTT_PASSWORD \"${MQTT_PASSWORD}\"" >> firmware/include/env.h
 echo "#define MQTT_PORT ${MQTT_PORT}" >> firmware/include/env.h
 echo "✅ env.h created in firmware/include"
+echo "✅ env.h contents:"
+cat firmware/include/env.h
 
 echo "⚙️ Building with PlatformIO..."
 pio run -v

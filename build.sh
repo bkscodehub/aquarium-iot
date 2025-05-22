@@ -45,7 +45,7 @@ PIO_FLAGS="-DWIFI_SSID=\\\"${WIFI_SSID}\\\" \
            -DMQTT_PORT=${MQTT_PORT}"
 
 echo "⚙️ Building with PlatformIO using injected flags..."
-pio run -v --environment esp12f --project-option="build_flags=${PIO_FLAGS}"
+pio run -v --environment esp12f --build-property="build_flags=${PIO_FLAGS}"
 
 # echo "⚙️ Building with PlatformIO..."
 # pio run -v

@@ -40,3 +40,9 @@ jobs:
         with:
           name: aquarium-lighting-firmware
           path: artifacts/firmware.bin
+
+      - name: 📦 Upload env file
+        uses: actions/upload-artifact@v4
+        with:
+          name: env-file
+          path: firmware/include/env.h

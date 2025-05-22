@@ -33,14 +33,6 @@ jobs:
         run: chmod +x build.sh
 
       - name: 🚀 Run build script
-        env: # ✅ Pass secrets here so build.sh can access them
-          WIFI_SSID: ${{ secrets.WIFI_SSID }}
-          WIFI_PASSWORD: ${{ secrets.WIFI_PASS }}
-          MQTT_BROKER: ${{ secrets.MQTT_BROKER }}
-          MQTT_USERNAME: ${{ secrets.MQTT_USERNAME }}
-          MQTT_PASSWORD: ${{ secrets.MQTT_PASS }}
-          MQTT_PORT: ${{ secrets.MQTT_PORT }}
-
         run: ./build.sh
 
       - name: 📦 Upload firmware artifact

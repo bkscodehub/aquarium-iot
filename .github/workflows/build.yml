@@ -38,6 +38,8 @@ jobs:
           echo "#define MQTT_USER \"${MQTT_USER}\"" >> firmware/include/env.h
           echo "#define MQTT_PASS \"${MQTT_PASS}\"" >> firmware/include/env.h
           echo "#define MQTT_PORT ${MQTT_PORT}" >> firmware/include/env.h
+          echo "🔐 HIVEMQ_BROKER_URL starts with: ${HIVEMQ_BROKER_URL:0:10}..."
+          echo "🔐 HIVEMQ_USERNAME is set: [${#HIVEMQ_USERNAME}] characters long"
 
       - name: 🛠️ Make build.sh executable
         run: chmod +x build.sh

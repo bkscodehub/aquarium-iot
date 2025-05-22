@@ -32,7 +32,7 @@ export PLATFORMIO_BUILD_FLAGS="-DWIFI_SSID=\\\"${WIFI_SSID}\\\" \
 -DMQTT_PORT=${MQTT_PORT}"
 
 echo "🔐 Injected build flags:"
-echo "$PLATFORMIO_BUILD_FLAGS" #| sed -e 's/WIFI_PASSWORD=.* /WIFI_PASSWORD=\"***\" /' -e 's/MQTT_PASSWORD=.* /MQTT_PASSWORD=\"***\" /'
+echo "$PLATFORMIO_BUILD_FLAGS" | sed -e 's/WIFI_PASSWORD=.* /WIFI_PASSWORD=\"***\" /' -e 's/MQTT_PASSWORD=.* /MQTT_PASSWORD=\"***\" /'
 
 echo "⚙️ Building with PlatformIO using injected flags..."
 pio run -v

@@ -45,4 +45,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: env-file
-          path: firmware/include/env.h
+          path: artifacts/env.h

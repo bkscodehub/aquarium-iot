@@ -22,6 +22,18 @@ ls -l firmware/src
 echo "🧪 PlatformIO INI contents:"
 cat platformio.ini
 
+# Generate env.h from environment variables if not already present
+echo "🔐 Generating env.h..."
+mkdir -p firmware/include
+echo "#pragma once" > firmware/include/env.h
+echo "#define WIFI_SSID \"${WIFI_SSID}\"" >> firmware/include/env.h
+echo "#define WIFI_PASSWORD \"${WIFI_PASSWORD}\"" >> firmware/include/env.h
+echo "#define MQTT_BROKER \"${MQTT_BROKER}\"" >> firmware/include/env.h
+echo "#define MQTT_USERNAME \"${MQTT_USERNAME}\"" >> firmware/include/env.h
+echo "#define MQTT_PASSWORD \"${MQTT_PASSWORD}\"" >> firmware/include/env.h
+echo "#define MQTT_PORT ${MQTT_PORT}" >> firmware/include/env.h
+echo "✅ env.h created in firmware/include"
+
 echo "⚙️ Building with PlatformIO..."
 pio run -v
 

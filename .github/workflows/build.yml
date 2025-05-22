@@ -21,30 +21,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install platformio
 
-      - name: 🔐 Setup environment header file
-        env:
+      - name: 🛠️ Make build.sh executable
+        run: chmod +x build.sh
+
+      - name: 🚀 Run build script
+        env: # ✅ Pass secrets here so build.sh can access them
           WIFI_SSID: ${{ secrets.WIFI_SSID }}
           WIFI_PASSWORD: ${{ secrets.WIFI_PASS }}
           MQTT_BROKER: ${{ secrets.MQTT_BROKER }}
           MQTT_USERNAME: ${{ secrets.MQTT_USERNAME }}
           MQTT_PASSWORD: ${{ secrets.MQTT_PASS }}
           MQTT_PORT: ${{ secrets.MQTT_PORT }}
-        run: |
-          mkdir -p firmware/include
-          echo "#pragma once" > firmware/include/env.h
-          echo "#define WIFI_SSID \"${WIFI_SSID}\"" >> firmware/include/env.h
-          echo "#define WIFI_PASSWORD \"${WIFI_PASSWORD}\"" >> firmware/include/env.h
-          echo "#define MQTT_BROKER \"${MQTT_BROKER}\"" >> firmware/include/env.h
-          echo "#define MQTT_USERNAME \"${MQTT_USERNAME}\"" >> firmware/include/env.h
-          echo "#define MQTT_PASSWORD \"${MQTT_PASSWORD}\"" >> firmware/include/env.h
-          echo "#define MQTT_PORT ${MQTT_PORT}" >> firmware/include/env.h
-          echo "🔐 HIVEMQ BROKER URL starts with: ${MQTT_BROKER:0:10}..."
-          echo "🔐 HIVEMQ USERNAME is set: [${MQTT_USERNAME}] characters long"
 
-      - name: 🛠️ Make build.sh executable
-        run: chmod +x build.sh
-
-      - name: 🚀 Run build script
         run: ./build.sh
 
       - name: 📦 Upload firmware artifact

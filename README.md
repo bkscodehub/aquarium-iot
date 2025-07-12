@@ -7,6 +7,7 @@ A modular, open-source IoT platform for automating and monitoring aquariums usin
 
 ---
 ## 🚀 Flashing the Firmware to ESP8266
+
 To flash the compiled firmware to your ESP8266 (ESP-12F) using esptool, follow the steps below:
 
 ### 🔧 Prerequisites
@@ -16,20 +17,23 @@ To flash the compiled firmware to your ESP8266 (ESP-12F) using esptool, follow t
 ```
 pip install esptool
 ```
+
 ### 📦 Flashing the Firmware
 Connect your ESP8266 to your computer via USB (through an FTDI adapter or USB-to-Serial).
 
 Ensure the board is in flash mode.
 
-Use the following command to flash the firmware:
+Download the `aquarium-lighting-firmware.zip` file from GitHub Actions workflow and extract `firmware.bin` file from the zip to a local directory.
+
+Use the following command from the local directory to flash the firmware:
 
 ```
 esptool.py --port COM6 --baud 115200 write_flash 0x00000 firmware.bin
 ```
+
 💡 Replace COM6 with your actual serial port. On Linux/macOS, it might look like /dev/ttyUSB0.
 
 ### ℹ️ Optional: Erase Flash Completely
-
 If you're encountering persistent issues or want to reset the ESP8266 to a clean state, you can erase the entire flash memory, including the EEPROM emulation area:
 
 ⚠️ Use with caution — this will remove all data stored in flash memory.

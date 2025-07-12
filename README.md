@@ -6,6 +6,57 @@ A modular, open-source IoT platform for automating and monitoring aquariums usin
 > This project and the associated subprojects are actively being developed. Features, structure, and code may change frequently. Feedback and contributions are welcome!
 
 ---
+## 🚀 Flashing the Firmware to ESP8266
+To flash the compiled firmware to your ESP8266 (ESP-12F) using esptool, follow the steps below:
+
+### 🔧 Prerequisites
+- Python 3 installed
+- esptool installed via pip:
+
+```
+pip install esptool
+```
+### 📦 Flashing the Firmware
+Connect your ESP8266 to your computer via USB (through an FTDI adapter or USB-to-Serial).
+
+Ensure the board is in flash mode.
+
+Use the following command to flash the firmware:
+
+```
+esptool.py --port COM6 --baud 115200 write_flash 0x00000 firmware.bin
+```
+💡 Replace COM6 with your actual serial port. On Linux/macOS, it might look like /dev/ttyUSB0.
+
+### ℹ️ Optional: Erase Flash Completely
+
+If you're encountering persistent issues or want to reset the ESP8266 to a clean state, you can erase the entire flash memory, including the EEPROM emulation area:
+
+⚠️ Use with caution — this will remove all data stored in flash memory.
+```
+esptool.py --port COM6 erase_flash
+```
+This is useful before installing a new version of the firmware from scratch.
+
+### 🔌 Wiring ESP-12F Adapter to FTDI Module
+Here's how to connect the ESP-12F to an FTDI module:
+
+- ESP-12F Adapter Pin	FTDI Pin
+- VCC	3.3V ⚠️ Do not use 5V
+- GND	GND
+- TX	RX of FTDI
+- RX	TX of FTDI
+- GPIO0	GND (only while uploading sketch)
+- EN / CH_PD	3.3V (must be pulled HIGH)
+
+**NOTE**: You can add a 10kΩ pull-up resistor to EN/CH_PD and optionally to RST and GPIO2 for stable operation.
+
+### 🔋Power Supply Warning
+**Important**: The ESP-12F draws peak currents >200mA, especially during Wi-Fi activity. Make sure your FTDI module’s 3.3V regulator can handle it.
+
+If the ESP keeps resetting or doesn’t respond, power it from a separate 3.3V LDO like AMS1117 instead, and just connect FTDI’s GND, TX, RX.
+
+---
 
 ## 🔧 Subprojects
 

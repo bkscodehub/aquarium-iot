@@ -10,7 +10,7 @@ A modular, open-source IoT platform for automating and monitoring aquariums usin
 ## 🔧 Subprojects
 
 ### 1. [Aquarium Lighting Controller](https://github.com/bkscodehub/aquarium-lighting-controller)
-This ESP-based controller automates aquarium lighting using time-based schedules and MQTT messages.
+This ESP8266-based controller automates aquarium lighting using time-based schedules and MQTT messages.
 
 - Written in C++/Arduino
 - Supports manual and automatic lighting modes
